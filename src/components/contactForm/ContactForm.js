@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import style from "./ContactForm.module.css";
 
 class ContactForm extends Component {
     state = {
@@ -14,16 +15,16 @@ class ContactForm extends Component {
     contactChek = () => {
         const { name, number } = this.state;
         const { contacts } = this.props;
-        const namesIsIn = contacts.reduce(
+        const namesIn = contacts.reduce(
             (acc, contact) => [...acc, contact.name],
             [],
         );
-        const numbersIsIn = contacts.reduce(
+        const numbersIn = contacts.reduce(
             (acc, contact) => [...acc, contact.number],
             [],
         );
 
-        if (namesIsIn.includes(name) || numbersIsIn.includes(number)) {
+        if (namesIn.includes(name) || numbersIn.includes(number)) {
             alert(`${name}${number} is already in contacts`);
         }
 
@@ -46,8 +47,8 @@ class ContactForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} >
-                <label >
+            <form onSubmit={this.handleSubmit} className={style.form}>
+                <label className={style.label}>
                     Name:
           <input
                         type="text"
@@ -55,10 +56,11 @@ class ContactForm extends Component {
                         value={this.state.name}
                         placeholder="enter name"
                         onChange={this.handleChange}
+                        className={style.input}
                     />
                 </label>
 
-                <label>
+                <label className={style.label}>
                     Number:
           <input
                         type="tel"
@@ -66,9 +68,10 @@ class ContactForm extends Component {
                         value={this.state.number}
                         placeholder="enter number"
                         onChange={this.handleChange}
+                        className={style.input}
                     />
                 </label>
-                <button type="submit" >
+                <button type="submit" className={style.button}>
                     Add contact
         </button>
             </form>
